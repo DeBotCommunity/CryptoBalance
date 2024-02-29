@@ -4,16 +4,15 @@ from userbot import client
 info = {'category': 'tools', 'pattern': 'wallet', 'description': 'Посмотреть баланс в CryptoBot'}
 
 EMOJI_MAP = {
-    "USDT": "<emoji document_id=6032709766881479783>💵</emoji>",
-    "TON": "<emoji document_id=6032804204622384196>💵</emoji>",
-    "BTC": "<emoji document_id=6032744483102133873>💵</emoji>",
-    "ETH": "<emoji document_id=6032967271645711263>💵</emoji>",
-    "BNB": "<emoji document_id=6032733926072520137>💵</emoji>",
-    "BUSD": "<emoji document_id=6033097439219551284>💵</emoji>",
-    "USDC": "<emoji document_id=6030553792083135328>💵</emoji>",
+    "USDT": "<emoji id=6032709766881479783>💵</emoji>",
+    "TON": "<emoji id=6032804204622384196>💵</emoji>",
+    "BTC": "<emoji id=6032744483102133873>💵</emoji>",
+    "ETH": "<emoji id=6032967271645711263>💵</emoji>",
+    "BNB": "<emoji id=6032733926072520137>💵</emoji>",
+    "BUSD": "<emoji id=6033097439219551284>💵</emoji>",
+    "USDC": "<emoji id=6030553792083135328>💵</emoji>",
 }
 
-client.parse_mode = 'html'
 
 @client.on(events.NewMessage(pattern=r'[.!/].*wallet'))
 async def wallet_command(event):
@@ -40,7 +39,7 @@ async def wallet_command(event):
             await r[0].click(0)
 
         balance_info = "\n\n".join(
-            f"{next((emoji for trigger, emoji in EMOJI_MAP.items() if trigger in line), '<emoji document_id=5471952986970267163>💎</emoji>')} <b>{line.split(maxsplit=1)[1]}</b>"
+            f"{next((emoji for trigger, emoji in EMOJI_MAP.items() if trigger in line), '<emoji id=5471952986970267163>💎</emoji>')} <b>{line.split(maxsplit=1)[1]}</b>"
             for line in r.text.splitlines()
             if line.startswith("·") and ": 0 " not in line
         )
@@ -50,4 +49,4 @@ async def wallet_command(event):
         else:
             response = "Empty balance"
         
-    await client.edit_message(event.message, f"👛 Твой <a href='https://t.me/CryptoBot'>CryptoBot</a> кошелёк:\n\n{response}", link_preview=False, parse_mode='HTML')
+    await client.edit_message(event.message, f"👛 Твой <a href='https://t.me/CryptoBot'>CryptoBot</a> кошелёк:\n\n{response}", link_preview=False)
